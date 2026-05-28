@@ -9,6 +9,10 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Newsroom } from './collections/Newsroom'
 import { Courses } from './collections/Courses'
+import { CoworkingSpaces } from './collections/Coworking'
+import  Pages  from './collections/Pages'
+import Categories from './collections/category'
+import { Consulting } from './collections/consulting'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Newsroom, Courses],
+  collections: [Users, Media, Newsroom, Courses,CoworkingSpaces,Pages,Categories,Consulting],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

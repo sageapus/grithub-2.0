@@ -1,53 +1,57 @@
 import type { CollectionConfig } from 'payload'
+// import {CoworkingSpaces} from '../collections/coworking'
+import {
+  MainHeadingBlock,
+  TextBlock,
+  GalleryBlock,
+  AddressBlock,
+  BookingBlock,
+  CancelBlock,
+  FacilityBlock,
+  JoinBlock,
+  WorkspaceBlock
+} from '../app/blocks/cowork' 
 
-export const Newsroom: CollectionConfig = {
-  slug: 'newsroom',
-  admin: {
-    useAsTitle: 'title',
-  },
+import {
+    ProductsBlock,
+    ButtonBlock
+}
+from'../app/blocks/consulting'
+
+const Pages: CollectionConfig = {
+  slug: 'pages',
   fields: [
     {
-      type: 'text',
       name: 'title',
+      type: 'text',
       required: true,
     },
     {
-      type: 'select',
-      name: 'Author',
-      options: [],
-    },
-    {
-      type: 'group',
-      fields: [
-        {
-          type: 'upload',
-          name: 'Main Image',
-          relationTo: 'media',
-        },
-        {
-          type: 'text',
-          name: 'Alternative Text',
-        },
-        {
-          type: 'text',
-          name: 'Image Caption',
-        },
-      ],
-    },
-    {
-      type: 'relationship',
-      name: 'Category',
-      relationTo: 'category',
-      hasMany: true,
-    },
-    {
-      type: 'date',
-      name: 'Published Date',
-    },
-    {
-      type: 'richText',
-      name: 'Body',
+      name: 'slug',
+      type: 'text',
       required: true,
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      required: true,
+       blocks: [
+        MainHeadingBlock,
+        TextBlock,
+        GalleryBlock,
+        AddressBlock,
+        BookingBlock,
+       CancelBlock,
+       FacilityBlock,
+       JoinBlock,
+       ButtonBlock,
+       ProductsBlock,
+       WorkspaceBlock
+       ]
     },
   ],
+  
 }
+
+export default Pages
+

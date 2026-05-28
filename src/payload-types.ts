@@ -69,8 +69,12 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    blog: Blog;
+    newsroom: Newsroom;
+    courses: Course;
+    'coworking-spaces': CoworkingSpace;
+    pages: Page;
     category: Category;
+    consulting: Consulting;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,8 +84,12 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    blog: BlogSelect<false> | BlogSelect<true>;
+    newsroom: NewsroomSelect<false> | NewsroomSelect<true>;
+    courses: CoursesSelect<false> | CoursesSelect<true>;
+    'coworking-spaces': CoworkingSpacesSelect<false> | CoworkingSpacesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     category: CategorySelect<false> | CategorySelect<true>;
+    consulting: ConsultingSelect<false> | ConsultingSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -167,9 +175,9 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog".
+ * via the `definition` "newsroom".
  */
-export interface Blog {
+export interface Newsroom {
   id: string;
   title: string;
   Author?: string | null;
@@ -202,8 +210,485 @@ export interface Blog {
  */
 export interface Category {
   id: string;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses".
+ */
+export interface Course {
+  id: string;
   title: string;
-  description?: string | null;
+  Author?: string | null;
+  'Main Image'?: (string | null) | Media;
+  'Alternative Text'?: string | null;
+  'Image Caption'?: string | null;
+  Category?: (string | Category)[] | null;
+  'Published Date'?: string | null;
+  Body: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coworking-spaces".
+ */
+export interface CoworkingSpace {
+  id: string;
+  city: string;
+  price?: number | null;
+  whatsappNumber?: string | null;
+  layout?:
+    | (
+        | {
+            heading: string;
+            tagline: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'MainHeading';
+          }
+        | {
+            description: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'text';
+          }
+        | {
+            gallery?:
+              | {
+                  gallery: string | Media;
+                  alt?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            heading: string;
+            line1?: string | null;
+            line2?: string | null;
+            line3?: string | null;
+            city?: string | null;
+            province?: string | null;
+            postalCode?: string | null;
+            country?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'address';
+          }
+        | {
+            heading: string;
+            description: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'booking';
+          }
+        | {
+            heading: string;
+            types?:
+              | {
+                  cancelTypes: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cancel';
+          }
+        | {
+            heading: string;
+            facilityHiglights: {
+              icon: string | Media;
+              description: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'facility';
+          }
+        | {
+            heading: string;
+            description: string;
+            button: {
+              label: string;
+              icon?: (string | null) | Media;
+              url: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'join';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  layout: (
+    | {
+        heading: string;
+        tagline: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'MainHeading';
+      }
+    | {
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'text';
+      }
+    | {
+        gallery?:
+          | {
+              gallery: string | Media;
+              alt?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'gallery';
+      }
+    | {
+        heading: string;
+        line1?: string | null;
+        line2?: string | null;
+        line3?: string | null;
+        city?: string | null;
+        province?: string | null;
+        postalCode?: string | null;
+        country?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'address';
+      }
+    | {
+        heading: string;
+        description: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'booking';
+      }
+    | {
+        heading: string;
+        types?:
+          | {
+              cancelTypes: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cancel';
+      }
+    | {
+        heading: string;
+        facilityHiglights: {
+          icon: string | Media;
+          description: string;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'facility';
+      }
+    | {
+        heading: string;
+        description: string;
+        button: {
+          label: string;
+          icon?: (string | null) | Media;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'join';
+      }
+    | {
+        button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact';
+      }
+    | {
+        consultingProducts: {
+          icon: string | Media;
+          subheading: string;
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'consulting';
+      }
+    | {
+        image?:
+          | {
+              image: string | Media;
+              alt?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        price?: number | null;
+        workspace: {
+          label: string;
+          types: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[];
+        button: {
+          icon?: (string | null) | Media;
+          label: string;
+          url: string;
+        };
+        info: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'form';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consulting".
+ */
+export interface Consulting {
+  id: string;
+  layout?:
+    | (
+        | {
+            heading: string;
+            tagline: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'MainHeading';
+          }
+        | {
+            description: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'text';
+          }
+        | {
+            consultingProducts: {
+              icon: string | Media;
+              subheading: string;
+              description: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              id?: string | null;
+            }[];
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'consulting';
+          }
+        | {
+            button: {
+              label: string;
+              url: string;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contact';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -240,12 +725,28 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
-        relationTo: 'blog';
-        value: string | Blog;
+        relationTo: 'newsroom';
+        value: string | Newsroom;
+      } | null)
+    | ({
+        relationTo: 'courses';
+        value: string | Course;
+      } | null)
+    | ({
+        relationTo: 'coworking-spaces';
+        value: string | CoworkingSpace;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: string | Page;
       } | null)
     | ({
         relationTo: 'category';
         value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'consulting';
+        value: string | Consulting;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -331,9 +832,9 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog_select".
+ * via the `definition` "newsroom_select".
  */
-export interface BlogSelect<T extends boolean = true> {
+export interface NewsroomSelect<T extends boolean = true> {
   title?: T;
   Author?: T;
   'Main Image'?: T;
@@ -347,11 +848,347 @@ export interface BlogSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "courses_select".
+ */
+export interface CoursesSelect<T extends boolean = true> {
+  title?: T;
+  Author?: T;
+  'Main Image'?: T;
+  'Alternative Text'?: T;
+  'Image Caption'?: T;
+  Category?: T;
+  'Published Date'?: T;
+  Body?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "coworking-spaces_select".
+ */
+export interface CoworkingSpacesSelect<T extends boolean = true> {
+  city?: T;
+  price?: T;
+  whatsappNumber?: T;
+  layout?:
+    | T
+    | {
+        MainHeading?:
+          | T
+          | {
+              heading?: T;
+              tagline?: T;
+              id?: T;
+              blockName?: T;
+            };
+        text?:
+          | T
+          | {
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              gallery?:
+                | T
+                | {
+                    gallery?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        address?:
+          | T
+          | {
+              heading?: T;
+              line1?: T;
+              line2?: T;
+              line3?: T;
+              city?: T;
+              province?: T;
+              postalCode?: T;
+              country?: T;
+              id?: T;
+              blockName?: T;
+            };
+        booking?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cancel?:
+          | T
+          | {
+              heading?: T;
+              types?:
+                | T
+                | {
+                    cancelTypes?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        facility?:
+          | T
+          | {
+              heading?: T;
+              facilityHiglights?:
+                | T
+                | {
+                    icon?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        join?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    icon?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        MainHeading?:
+          | T
+          | {
+              heading?: T;
+              tagline?: T;
+              id?: T;
+              blockName?: T;
+            };
+        text?:
+          | T
+          | {
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              gallery?:
+                | T
+                | {
+                    gallery?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        address?:
+          | T
+          | {
+              heading?: T;
+              line1?: T;
+              line2?: T;
+              line3?: T;
+              city?: T;
+              province?: T;
+              postalCode?: T;
+              country?: T;
+              id?: T;
+              blockName?: T;
+            };
+        booking?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cancel?:
+          | T
+          | {
+              heading?: T;
+              types?:
+                | T
+                | {
+                    cancelTypes?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        facility?:
+          | T
+          | {
+              heading?: T;
+              facilityHiglights?:
+                | T
+                | {
+                    icon?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        join?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    icon?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contact?:
+          | T
+          | {
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        consulting?:
+          | T
+          | {
+              consultingProducts?:
+                | T
+                | {
+                    icon?: T;
+                    subheading?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        form?:
+          | T
+          | {
+              image?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              price?: T;
+              workspace?:
+                | T
+                | {
+                    label?: T;
+                    types?: T;
+                    id?: T;
+                  };
+              button?:
+                | T
+                | {
+                    icon?: T;
+                    label?: T;
+                    url?: T;
+                  };
+              info?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "category_select".
  */
 export interface CategorySelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consulting_select".
+ */
+export interface ConsultingSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        MainHeading?:
+          | T
+          | {
+              heading?: T;
+              tagline?: T;
+              id?: T;
+              blockName?: T;
+            };
+        text?:
+          | T
+          | {
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        consulting?:
+          | T
+          | {
+              consultingProducts?:
+                | T
+                | {
+                    icon?: T;
+                    subheading?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contact?:
+          | T
+          | {
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
