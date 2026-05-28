@@ -13,6 +13,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
+        
       },
     ],
     localPatterns: [
@@ -32,6 +33,9 @@ const nextConfig = {
         pathname: '/whitepapers/**',
         search: '',
       },
+      {
+        pathname:'/api/media/**'
+      }
     ],
   },
   // Your Next.js config here
