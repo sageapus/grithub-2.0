@@ -294,3 +294,21 @@ export const WorkspaceBlock: Block = {
         }
     ]
 }
+
+export const SubheadingBlock:Block={
+    slug:'subheading',
+    fields:[
+        {
+            name:'subheading',
+            type: 'text',
+
+        },
+        {
+            name:"tag",
+            type:"text",
+
+        }
+    ]
+
+
+}

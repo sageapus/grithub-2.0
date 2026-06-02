@@ -22,8 +22,8 @@ export default function ProgramBlock({block}:{block: ProgramBlockProps})
                             <Image className={Style.cardTopOverflow}
                                 
                                 src={item.icon.url}
-                                 width={100} 
-                                height={100} 
+                                 width={150} 
+                                height={150} 
                                 alt={item.icon.alt || 'icon'} 
                             />
                         )}  

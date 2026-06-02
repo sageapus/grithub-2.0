@@ -7,7 +7,8 @@ import {
   BookingBlock,
   CancelBlock,
   FacilityBlock,
-  JoinBlock
+  JoinBlock,
+
 } from '../app/blocks/cowork' 
 import {CollectionConfig} from 'payload'
 

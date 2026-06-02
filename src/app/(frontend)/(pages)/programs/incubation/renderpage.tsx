@@ -16,6 +16,7 @@ export function RenderBlocks({ blocks }: Props) {
 
   return (
     <>
+    <section className="container-xxl text-center col-12 d-flex pt-5 flex-column mb-5" id="programs">
       {blocks.map((block, i) => {
         switch (block.blockType) {
 
@@ -25,10 +26,18 @@ export function RenderBlocks({ blocks }: Props) {
           case 'text':
             return <TextBlock key={i} block={block} />
 
+          default:
+              return null
+        }})}
+        </section>
+
+        {blocks.map((block, i) => {
+        switch (block.blockType) {
+
           case 'consulting':
             return <ProgramBlock key={i} block={block} />
 
-          case 'MainHeading':
+          case 'subheading':
             return <SubHeadingBlock key={i} block={block} />
 
           default:

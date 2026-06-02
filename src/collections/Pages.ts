@@ -9,7 +9,8 @@ import {
   CancelBlock,
   FacilityBlock,
   JoinBlock,
-  WorkspaceBlock
+  WorkspaceBlock,
+  SubheadingBlock,
 } from '../app/blocks/cowork' 
 
 import {
@@ -46,7 +47,8 @@ const Pages: CollectionConfig = {
        JoinBlock,
        ButtonBlock,
        ProductsBlock,
-       WorkspaceBlock
+       WorkspaceBlock,
+       SubheadingBlock
        ]
     },
   ],

@@ -32,8 +32,6 @@ export default async function IncubationPage() {
   if (!page) return <div>Page not found</div>
 
   return (                                      
-    <section className="container-fluid d-flex justify-content-center align-items-center flex-column" id="programs-workshops">
       <RenderBlocks blocks={page.layout} />     
-    </section>
   )
 }

@@ -10,10 +10,10 @@ type MainHeadingProps = Extract<Page['layout'][0], { blockType: 'MainHeading' }>
 export default function MainHeadingBlock({ block }: { block: MainHeadingProps }) {
     return (
         <div>
-            <section className="container-xxl text-center col-12">
-            <h1 className="display-2 fw-bold">{block.heading}</h1>
-                
-             <RichText data={block.tagline} className="lead text-muted fs-3"/></section>
+            
+            <h1 className={`display-1 ${playfair.className}`}>{block.heading}</h1>
+             <RichText data={block.tagline} className="lead text-muted fs-3"/>
+             
              
                 
         </div>

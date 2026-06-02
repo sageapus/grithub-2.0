@@ -600,6 +600,13 @@ export interface Page {
         blockName?: string | null;
         blockType: 'form';
       }
+    | {
+        subheading?: string | null;
+        tag?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'subheading';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -1123,6 +1130,14 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                   };
               info?: T;
+              id?: T;
+              blockName?: T;
+            };
+        subheading?:
+          | T
+          | {
+              subheading?: T;
+              tag?: T;
               id?: T;
               blockName?: T;
             };
