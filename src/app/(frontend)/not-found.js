@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import Style from '@frontend/(pages)/page.module.scss'
 import MainNav from 'components/navigation/MainNav'
-import FooterNav from 'components/navigation/FooterNav'
+// import FooterNav from 'components/navigation/FooterNav'
 
 function NotFound() {
   const router = useRouter()
@@ -29,7 +29,7 @@ function NotFound() {
         </section>
       </main>
 
-      <FooterNav />
+      {/* <FooterNav /> */}
     </>
   )
 }

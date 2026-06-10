@@ -13,6 +13,7 @@ import { CoworkingSpaces } from './collections/Coworking'
 import  Pages  from './collections/Pages'
 import Categories from './collections/category'
 import { Consulting } from './collections/consulting'
+import {Footer} from './collections/footer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,6 +26,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Newsroom, Courses,CoworkingSpaces,Pages,Categories,Consulting],
+  globals: [Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

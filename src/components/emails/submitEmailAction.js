@@ -5,9 +5,10 @@ import Airtable from "@/services/airtable/airtable.service";
 
 export default async function submitEmailAction(data){
     const airtable = new Airtable({ baseTable: process.env.airTable_table_id });
+    const honeypotValue = data["b_26e45841b4abf188b36813479_e04129a9c8"];
 
     // if our honeypot has been filled out, we know it's a bot
-    if( data["b_26e45841b4abf188b36813479_e04129a9c8"] !== "" ){
+    if( honeypotValue ){
         return { result: "error", msg: "Please try again" }
     }
 

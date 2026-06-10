@@ -19,6 +19,8 @@ import {
 }
 from'../app/blocks/consulting'
 
+
+
 const Pages: CollectionConfig = {
   slug: 'pages',
   fields: [
@@ -48,7 +50,7 @@ const Pages: CollectionConfig = {
        ButtonBlock,
        ProductsBlock,
        WorkspaceBlock,
-       SubheadingBlock
+       SubheadingBlock,
        ]
     },
   ],
