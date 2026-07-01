@@ -14,8 +14,12 @@
 
 .formFieldB{
     position: absolute;
-    right: 99999px;
-    color: #fff;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .formCntr{

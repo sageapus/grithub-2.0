@@ -55,7 +55,7 @@ export default function FooterEmailForm() {
           success: (
             <div className="d-flex justify-content-start align-items-center align-content-center">
               {/* Visual success mark shown beside the response message. */}
-              <strong className="fw-bold fs-1 text-success lh-1 me-2">&check;</strong>
+              {/* <strong className="fw-bold fs-1 text-success lh-1 me-2">&check;</strong> */}
               {/* Message returned by submitEmailAction. */}
               <span className="text-success">{status.msg}</span>
             </div>
