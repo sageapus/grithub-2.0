@@ -184,7 +184,11 @@ export interface Media {
 export interface Newsroom {
   id: string;
   title: string;
-  Author?: string | null;
+  /**
+   * Auto-generated from the title. Leave blank to auto-fill.
+   */
+  slug?: string | null;
+  Author?: ('Garden Route Innovation & Technology Hub' | 'Udy Obi' | 'Marshall Grant')[] | null;
   'Main Image'?: (string | null) | Media;
   'Alternative Text'?: string | null;
   'Image Caption'?: string | null;
@@ -847,6 +851,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface NewsroomSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   Author?: T;
   'Main Image'?: T;
   'Alternative Text'?: T;

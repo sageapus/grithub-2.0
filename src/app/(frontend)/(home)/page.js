@@ -52,7 +52,7 @@ export default async function Home() {
 
             <div
               className="col-11 col-md-7 ps-md-5 ps-3 ms-md-2 ms-xl-0 mt-md-5"
-              style={{ flex: '.50 0 auto;' }}
+              style={{ flex: '.50 0 auto' }}
             >
               <p className={Style.heroText}>Learn. Grow. Go.</p>
               <p className={Style.heroSubText}>
