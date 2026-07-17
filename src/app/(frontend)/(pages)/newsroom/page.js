@@ -27,13 +27,13 @@ async function NewsHomePage({ searchParams}){
         collection:'newsroom',
         limit: pageRange,
         page: currentPage,
-        sort:'-Published Date'
+        sort:'-publishedDate'
     })
 
     // Fetches all posts so the page can calculate how many pagination pages exist.
     const totalPosts = latest.totalDocs
     // Divides the total number of posts by the amount shown per page.
-    let totalPages = Math.ceil(totalPosts.length / pageRange)
+    let totalPages = Math.ceil(totalPosts/ pageRange)
     // Hides pagination when there is only one page of posts.
     totalPages = totalPages === 1 ? 0 : totalPages
 

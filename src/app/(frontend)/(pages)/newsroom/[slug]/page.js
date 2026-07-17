@@ -49,7 +49,7 @@ async function NewsArticle({ params }) {
     const payload= await getPayload({config})
     
     // Asks Payload for up to 9 documents from the "newsroom" collection. This result is a WRAPPER object — it contains a .docs array plus pagination info, not a plain list of posts by itself.
-    const latest = await payload.find({ collection:'newsroom',limit: end })
+    const latest = await payload.find({ collection:'newsroom',limit: end ,sort:'-publishedDate'})
     
     // Pulls "slug" out of the page's route parameters (from the URL).
     const { slug } = await params;
@@ -62,8 +62,8 @@ async function NewsArticle({ params }) {
     const post = await payload.find({collection:'newsroom',where:{slug:{equals:articleSlug}}})
     // Pulls the first (and presumably only) matching document out of the .docs array — this IS the actual single article object.
     const latestPost=post.docs[0]
-    // Tries to build a readable date. This reaches into "Published Date" and then looks for a FURTHER nested ".publishedAt" inside it — but "Published Date" is already a plain date string, so this nested lookup returns undefined, making the whole date invalid ("Invalid Date").
-    const date = new Date(latestPost["Published Date"]).toLocaleDateString('en-GB', {
+    // Tries to build a readable date. This reaches into "publishedDate" and then looks for a FURTHER nested ".publishedAt" inside it — but "publishedDate" is already a plain date string, so this nested lookup returns undefined, making the whole date invalid ("Invalid Date").
+    const date = new Date(latestPost["publishedDate"]).toLocaleDateString('en-GB', {
         year: 'numeric',   // shows the full year, like "2026"
         month: 'long',     // shows the full month name, like "July" instead of "07"
         day: 'numeric'     // shows the day number, like "13"
@@ -72,22 +72,25 @@ async function NewsArticle({ params }) {
     // Defines a "converters" function for RichText — it receives Payload's built-in default converters and is meant to add/override specific ones.
     const customComponents = ({ defaultConverters }) => ({
     ...defaultConverters,
-    upload: ({ node }) => <BodyImage value={node.value} />,
-    horizontalrule: () => <hr className="my-4" />,
-    link: ({ children, node }) => {
+    upload: ({ node }) => (
+    <BodyImage 
+        mainImage={node.value} 
+        caption={node.fields?.caption} 
+        Style={Style} 
+    />
+),
+    marks:{
+        hr: () => <hr className="my-4" />,
+        link: ({ children, node }) => {
     // Handle both "custom" (external URL) and "internal" (linked document) link types
-    const href = node.fields.linkType === 'internal'
-        ? `/${node.fields.doc?.value?.slug ?? ''}`
-        : node.fields.url
-
-    const rel = href && !href.startsWith('/') ? 'noreferrer noopener' : undefined
+       const rel = !node.fields.url.startsWith('/') ? 'noreferrer noopener' : undefined
 
     return (
-        <a href={href} rel={rel} target={node.fields.newTab ? "_blank" : undefined}>
+        <a href={node.fields.url} rel={rel} target={node.fields.newTab ? "_blank" : undefined}>
             {children}
         </a>
     )
-}
+}}
 })
   
 
@@ -165,6 +168,8 @@ async function NewsArticle({ params }) {
                     </div>
                 </article>
 
+                
+
                 {/* Sidebar column, 4/12 columns wide, for the "latest articles" list. */}
                 <aside className="col-12 col-md-4">
                     <h3>Latest</h3>
@@ -182,9 +187,9 @@ async function NewsArticle({ params }) {
                                             {post['title']}
                                         </h4>
                                     </Link>
-                                    {/* Same nested-lookup bug as the main date above — "Published Date" is already the plain date string, so ?.publishedAt returns undefined, giving "Invalid Date" for every sidebar item too. */}
+                                    {/* Same nested-lookup bug as the main date above — "publishedDate" is already the plain date string, so ?.publishedAt returns undefined, giving "Invalid Date" for every sidebar item too. */}
                                     <small className="text-muted fs-7">
-                                        {new Date(post["Published Date"]).toLocaleDateString('en-GB', {
+                                        {new Date(post["publishedDate"]).toLocaleDateString('en-GB', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric'
@@ -204,7 +209,7 @@ async function NewsArticle({ params }) {
                 description={latestPost["Body"]}
                 image={latestPost["Main Image"]}
                 author={latestPost["Author"] ?? "GRIT Hub Staff Writer"}
-                postDate={latestPost["Published Date"]}
+                postDate={latestPost["publishedDate"]}
                 dateUpdated={latestPost["updatedAt"]}
             />
         </>

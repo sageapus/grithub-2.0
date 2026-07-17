@@ -193,7 +193,7 @@ export interface Newsroom {
   'Alternative Text'?: string | null;
   'Image Caption'?: string | null;
   Category?: (string | Category)[] | null;
-  'Published Date'?: string | null;
+  publishedDate?: string | null;
   Body: {
     root: {
       type: string;
@@ -857,7 +857,7 @@ export interface NewsroomSelect<T extends boolean = true> {
   'Alternative Text'?: T;
   'Image Caption'?: T;
   Category?: T;
-  'Published Date'?: T;
+  publishedDate?: T;
   Body?: T;
   updatedAt?: T;
   createdAt?: T;

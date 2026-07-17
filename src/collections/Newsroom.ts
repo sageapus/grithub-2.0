@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { lexicalEditor, UploadFeature } from '@payloadcms/richtext-lexical'
 
 export const Newsroom: CollectionConfig = {
   slug: 'newsroom',
@@ -68,12 +69,27 @@ export const Newsroom: CollectionConfig = {
     },
     {
       type: 'date',
-      name: 'Published Date',
+      name: 'publishedDate',
     },
     {
       type: 'richText',
       name: 'Body',
       required: true,
-    },
+      editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      UploadFeature({
+        collections: {
+          media: {
+            fields: [
+              { name: 'caption', type: 'text' },
+            ],
+          },
+        },
+      }),
+    ],
+  }),
+},
+
   ],
 }

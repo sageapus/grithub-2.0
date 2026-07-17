@@ -5,7 +5,8 @@ import { blurImage } from "@/lib/constants";
 
 
 // Renders a Payload media image for the newsroom article body.
-function BodyImage({ mainImage, value, Style }){
+function BodyImage({ mainImage, caption, Style }){
+    if (!mainImage?.url) return null
     return (
         // Wraps the image and caption in a semantic figure element.
         <figure className={Style.figure}>
@@ -16,16 +17,17 @@ function BodyImage({ mainImage, value, Style }){
                     src={mainImage.url}
                     width={800}
                     height={547}
-                    alt={value?.alt ?? mainImage?.alt ?? "image"}
+                    alt={caption?.alt ?? mainImage?.alt ?? "image"}
                     placeholder="blur"
                     blurDataURL={blurImage}
                 />
             )}
 
             {/* Shows the caption when the caller provides one. */}
-            <figcaption className={Style.caption}>
+            {caption && <figcaption className={Style.caption}>{caption}</figcaption>}
+            {/* <figcaption className={Style.caption}>
                 {value?.caption}
-            </figcaption>
+            </figcaption> */}
         </figure>
     )
 }

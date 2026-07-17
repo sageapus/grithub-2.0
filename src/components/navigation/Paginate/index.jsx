@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import ReactPaginate from "react-paginate";
 import PaginateBtn from "./PaginateBtn";
-
+import { useSearchParams } from "next/navigation"
 
 function Paginate({
     range = 3,
@@ -21,14 +21,16 @@ function Paginate({
     nextClassName
 }){
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const currentPage = Number(searchParams.get('page')) || 1;
 
     function pageChanged(event){
-        const { selected } = event;
-        const offSet = Math.ceil(selected * range);
-        const next = offSet + range;
+    const { selected } = event;
+    
+    const newPage = selected + 1;
 
-        router.push(pathName + `?previous=${offSet}&next=${next}`)
-    }
+    router.push(`${pathName}?page=${newPage}`)
+}
 
 
     return(

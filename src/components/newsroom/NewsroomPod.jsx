@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 // Renders one newsroom article card in the newsroom grid.
-function NewsroomPod({ slug, "Main Image":mainImage, title, "Published Date":publishedAt }){
+function NewsroomPod({ slug, "Main Image":mainImage, title, "publishedDate":publishedAt }){
     // Payload is using the title as the article slug, so encode it before putting it in the URL.
     const articleSlug = encodeURIComponent(slug || title || '')
 
