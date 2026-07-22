@@ -1,16 +1,16 @@
-import FooterNav from '../../components/navigation/FooterNav';
-import MainNav from '../../components/navigation/MainNav';
-import Style from '../(pages)/page.module.scss';
+import FooterNav from 'components/navigation/FooterNav'
+import MainNav from 'components/navigation/MainNav'
+import Style from '@/app/(frontend)/(pages)/page.module.scss'
 
-function GeneralPageLayout({ children }){
-    return(
-        <>
-            <main className="container-fluid d-flex p-0 flex-column">
-                <section className={Style.heroWrapper}>
-                    <div className={Style.hero}>
-                        <MainNav page />
+function GeneralPageLayout({ children }) {
+  return (
+    <>
+      <main className="container-fluid d-flex p-0 flex-column">
+        <section className={Style.heroWrapper}>
+          <div className={Style.hero}>
+            <MainNav page />
 
-                        {/* <div className={clsx(Style.headingWrapper, centerTitle && Style.centerHeading, className)}>
+            {/* <div className={clsx(Style.headingWrapper, centerTitle && Style.centerHeading, className)}>
                             <h1 className={Style.heading}>
                                 {title}
                             </h1>
@@ -22,15 +22,15 @@ function GeneralPageLayout({ children }){
                             )}
                             
                         </div> */}
-                    </div>
-                </section>
+          </div>
+        </section>
 
-                {children}
-            </main>
+        {children}
+      </main>
 
-            <FooterNav />
-        </>
-    )
+      <FooterNav />
+    </>
+  )
 }
 
-export default GeneralPageLayout;
+export default GeneralPageLayout

@@ -27,7 +27,8 @@
       "styles/*": ["./src/styles/*"],
       "thirdparty/*": ["./src/thirdparty/*"],
       "assets/*": ["./src/public/assets/*"],
-      "services/*": ["./src/services/*"]
+      "services/*": ["./src/services/*"],
+      "ui/*": ["./src/ui/*"]
     },
     "target": "ES2022"
   },
